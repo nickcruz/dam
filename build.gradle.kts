@@ -13,8 +13,9 @@ repositories {
 }
 
 dependencies {
-    compile(kotlin("stdlib-jdk8"))
-    testCompile("junit", "junit", "4.12")
+    implementation(kotlin("stdlib-jdk8"))
+    implementation("no.tornado:tornadofx:1.7.15")
+    testImplementation("junit", "junit", "4.12")
 }
 
 configure<JavaPluginConvention> {
