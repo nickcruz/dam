@@ -22,7 +22,7 @@ class DamView : View(VIEW_TITLE) {
         hbox {
             label("Root Directory")
             rootDirectoryField = textfield {
-                textProperty().onChange { it?.run { imageExplorerViewModel.setRootDirectory(it) } }
+                textProperty().onChange { imageExplorerViewModel.rootDirectory = it.orEmpty() }
             }
         }
     }
