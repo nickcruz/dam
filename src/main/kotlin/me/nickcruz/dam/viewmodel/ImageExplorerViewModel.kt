@@ -3,19 +3,24 @@ package me.nickcruz.dam.viewmodel
 import tornadofx.getProperty
 import tornadofx.onChange
 import tornadofx.property
+import java.io.File
 
 /**
  * Exposes all images in a given root directory, recursively.
  */
 class ImageExplorerViewModel {
 
-    var rootDirectory: String by property()
+    var rootDirectory: File by property()
 
     init {
-        getProperty(ImageExplorerViewModel::rootDirectory).onChange { onRootDirectoryChanged() }
+        onRootDirectoryChanged { updateImagePaths() }
     }
 
-    private fun onRootDirectoryChanged() {
-        println(rootDirectory)
+    fun onRootDirectoryChanged(op: (File) -> Unit) {
+        getProperty(ImageExplorerViewModel::rootDirectory).onChange { it?.let(op) }
+    }
+
+    private fun updateImagePaths() {
+        println(rootDirectory.absolutePath)
     }
 }

@@ -1,33 +1,48 @@
 package me.nickcruz.dam.view
 
-import javafx.scene.control.TextField
+import javafx.event.EventHandler
+import javafx.scene.control.Label
+import javafx.stage.DirectoryChooser
 import me.nickcruz.dam.viewmodel.ImageExplorerViewModel
 import tornadofx.View
+import tornadofx.button
 import tornadofx.hbox
 import tornadofx.label
-import tornadofx.onChange
 import tornadofx.singleAssign
-import tornadofx.textfield
 import tornadofx.vbox
+import java.io.File
 
 /**
  * Initial view for DAM. app.
  */
 class DamView : View(VIEW_TITLE) {
 
-    private var rootDirectoryField: TextField by singleAssign()
+    private var rootDirectoryLabel: Label by singleAssign()
+
+    private val directoryChooser = DirectoryChooser().apply {
+        title = CHOOSE_ROOT_DIRECTORY
+        initialDirectory = File(INITIAL_DIRECTORY)
+    }
+
     private val imageExplorerViewModel = ImageExplorerViewModel()
+
+    init {
+        imageExplorerViewModel.onRootDirectoryChanged { rootDirectoryLabel.text = it.absolutePath }
+    }
 
     override val root = vbox {
         hbox {
-            label("Root Directory")
-            rootDirectoryField = textfield {
-                textProperty().onChange { imageExplorerViewModel.rootDirectory = it.orEmpty() }
+            button(CHOOSE_ROOT_DIRECTORY).onAction = EventHandler {
+                imageExplorerViewModel.rootDirectory = directoryChooser.showDialog(currentWindow)
             }
+            rootDirectoryLabel = label()
         }
     }
 
     companion object {
         private const val VIEW_TITLE = "DAM."
+        private const val CHOOSE_ROOT_DIRECTORY = "Choose a root directory"
+
+        private val INITIAL_DIRECTORY = System.getProperty("user.home")
     }
 }
