@@ -21,6 +21,10 @@ class ImageExplorerViewModel {
     }
 
     private fun updateImagePaths() {
-        println(rootDirectory.absolutePath)
+        // TODO(nick): Make this recursively iterate through the file tree.
+        // TODO(nick): Set up a coroutine channel that all images found.
+        rootDirectory
+            .listFiles { file -> file.isDirectory || file.absolutePath.endsWith(".jpg", true) }
+            .forEach { println(it) } // TODO(nick): Instead of printing, show the filenames in a ListView.
     }
 }
