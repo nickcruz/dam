@@ -6,8 +6,10 @@ import javafx.stage.DirectoryChooser
 import me.nickcruz.dam.viewmodel.ImageExplorerViewModel
 import tornadofx.View
 import tornadofx.button
+import tornadofx.fitToParentSize
 import tornadofx.hbox
 import tornadofx.label
+import tornadofx.listview
 import tornadofx.singleAssign
 import tornadofx.vbox
 import java.io.File
@@ -31,12 +33,14 @@ class DamView : View(VIEW_TITLE) {
     }
 
     override val root = vbox {
+        fitToParentSize()
         hbox {
             button(CHOOSE_ROOT_DIRECTORY).onAction = EventHandler {
                 imageExplorerViewModel.rootDirectory = directoryChooser.showDialog(currentWindow)
             }
             rootDirectoryLabel = label()
         }
+        listview(imageExplorerViewModel.images)
     }
 
     companion object {

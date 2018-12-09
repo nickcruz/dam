@@ -1,7 +1,9 @@
 package me.nickcruz.dam.viewmodel
 
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import javafx.collections.FXCollections.observableArrayList
+import javafx.collections.ObservableList
+import me.nickcruz.dam.image.ImageFinder
+import tornadofx.FX.Companion.log
 import tornadofx.getProperty
 import tornadofx.onChange
 import tornadofx.property
@@ -13,6 +15,8 @@ import java.io.File
 class ImageExplorerViewModel {
 
     var rootDirectory: File by property()
+    val images: ObservableList<File> = observableArrayList<File>()
+    private val imageFinder = ImageFinder()
 
     init {
         onRootDirectoryChanged { updateImagePaths() }
@@ -23,12 +27,7 @@ class ImageExplorerViewModel {
     }
 
     private fun updateImagePaths() {
-        // TODO(nick): Make this recursively iterate through the file tree.
-        // TODO(nick): Set up a coroutine channel that all images found.
-        GlobalScope.launch {
-            rootDirectory
-                .listFiles { file -> file.isDirectory || file.absolutePath.endsWith(".jpg", true) }
-                .forEach { println(it) } // TODO(nick): Instead of printing, show the filenames in a ListView.
-        }
+        images.setAll(imageFinder.findImages(rootDirectory))
+        log.info("Number of images found: ${images.size}")
     }
 }
