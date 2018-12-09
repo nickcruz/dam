@@ -24,7 +24,7 @@ class ImageFinder {
                     }
                 }
         }
-        return imagesFound.sorted()
+        return imagesFound
     }
 
     private fun File.isImage(): Boolean {
