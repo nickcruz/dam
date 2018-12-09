@@ -9,12 +9,15 @@ group = "me.nickcruz"
 version = "1.0-SNAPSHOT"
 
 repositories {
+    jcenter()
     mavenCentral()
 }
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation("no.tornado:tornadofx:1.7.15")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1")
+
     testImplementation("junit", "junit", "4.12")
 }
 

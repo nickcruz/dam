@@ -1,5 +1,7 @@
 package me.nickcruz.dam.viewmodel
 
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import tornadofx.getProperty
 import tornadofx.onChange
 import tornadofx.property
@@ -23,8 +25,10 @@ class ImageExplorerViewModel {
     private fun updateImagePaths() {
         // TODO(nick): Make this recursively iterate through the file tree.
         // TODO(nick): Set up a coroutine channel that all images found.
-        rootDirectory
-            .listFiles { file -> file.isDirectory || file.absolutePath.endsWith(".jpg", true) }
-            .forEach { println(it) } // TODO(nick): Instead of printing, show the filenames in a ListView.
+        GlobalScope.launch {
+            rootDirectory
+                .listFiles { file -> file.isDirectory || file.absolutePath.endsWith(".jpg", true) }
+                .forEach { println(it) } // TODO(nick): Instead of printing, show the filenames in a ListView.
+        }
     }
 }
