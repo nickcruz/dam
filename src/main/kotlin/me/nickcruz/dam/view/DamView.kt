@@ -4,16 +4,12 @@ import javafx.event.EventHandler
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.stage.DirectoryChooser
-import me.nickcruz.dam.control.ImageGallery
 import me.nickcruz.dam.control.imagegallery
 import me.nickcruz.dam.viewmodel.ImageExplorerViewModel
 import tornadofx.View
 import tornadofx.button
-import tornadofx.flowpane
 import tornadofx.hbox
-import tornadofx.imageview
 import tornadofx.label
-import tornadofx.onChange
 import tornadofx.scrollpane
 import tornadofx.singleAssign
 import tornadofx.vbox

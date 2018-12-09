@@ -1,12 +1,10 @@
 package me.nickcruz.dam.control
 
 import javafx.collections.ObservableList
-import javafx.event.EventTarget
 import javafx.scene.layout.FlowPane
 import tornadofx.fitToParentSize
 import tornadofx.imageview
 import tornadofx.onChange
-import tornadofx.opcr
 import java.io.File
 
 /**
@@ -33,6 +31,3 @@ class ImageGallery(images: ObservableList<File>) : FlowPane() {
         private const val GAP = 4.0
     }
 }
-
-fun EventTarget.imagegallery(images: ObservableList<File>, op: ImageGallery.() -> Unit = {}) =
-    opcr(this, ImageGallery(images), op)
