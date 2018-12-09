@@ -28,7 +28,7 @@ class ImageExplorerViewModel {
 
     private fun updateImagePaths() {
         imageFinder.findImages(rootDirectory)
-            .sortedBy { it.lastModified() }
+            .sortedByDescending { it.lastModified() }
             .run {
                 images.setAll(this)
                 log.info("Number of images found: $size")
