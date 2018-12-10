@@ -1,5 +1,6 @@
 package me.nickcruz.dam.control
 
+import com.drew.imaging.ImageMetadataReader
 import javafx.collections.ObservableList
 import javafx.scene.layout.FlowPane
 import tornadofx.fitToParentSize
@@ -19,6 +20,12 @@ class ImageGallery(images: ObservableList<File>) : FlowPane() {
 
         images.onChange {
             children.setAll(it.list.map { file ->
+                println(file.absolutePath)
+                ImageMetadataReader.readMetadata(file).directories.forEach {
+                    for (tag in it.tags) {
+                        println("  $tag")
+                    }
+                }
                 imageview(file.toURI().toString()) {
                     isPreserveRatio = true
                     fitHeight = 400.0

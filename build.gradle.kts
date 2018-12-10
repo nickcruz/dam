@@ -15,6 +15,7 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
+    implementation("com.drewnoakes:metadata-extractor:2.11.0")
     implementation("no.tornado:tornadofx:1.7.15")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1")
 

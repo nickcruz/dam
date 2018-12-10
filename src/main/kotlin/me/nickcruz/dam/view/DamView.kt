@@ -8,6 +8,7 @@ import me.nickcruz.dam.control.imagegallery
 import me.nickcruz.dam.viewmodel.ImageExplorerViewModel
 import tornadofx.View
 import tornadofx.button
+import tornadofx.fitToParentSize
 import tornadofx.hbox
 import tornadofx.label
 import tornadofx.scrollpane
@@ -36,6 +37,7 @@ class DamView : View(VIEW_TITLE) {
             rootDirectoryLabel = label()
         }
         scrollpane(true, true) {
+            fitToParentSize()
             imagegallery(imageExplorerViewModel.images)
         }
     }
